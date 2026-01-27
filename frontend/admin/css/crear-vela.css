@@ -21,7 +21,6 @@ body {
     min-height: 100vh;
 }
 
-/* Header y Botón Volver */
 .header-tools {
     max-width: 700px;
     margin: 0 auto 30px auto;
@@ -54,7 +53,6 @@ body {
     margin: 0;
 }
 
-/* Tarjeta del Formulario */
 .form-container {
     background: var(--card-bg);
     max-width: 700px;
@@ -81,7 +79,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* Rejilla */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -121,7 +118,6 @@ body {
     background: #111;
 }
 
-/* Input de Imagen */
 .custom-file-upload {
     display: flex;
     flex-direction: column;
@@ -152,7 +148,6 @@ body {
     border: 2px solid var(--primary-red);
 }
 
-/* Botón Publicar */
 .btn-publish {
     grid-column: span 2;
     padding: 16px;

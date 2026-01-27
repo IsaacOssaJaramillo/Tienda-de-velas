@@ -2,7 +2,6 @@ const supabaseUrl = 'https://irpgynjvxlsshaxgeuie.supabase.co';
 const supabaseKey = 'sb_publishable_LFzpTNq551UgF7Niftmoog_wWoC7iBS'; 
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-// --- 1. VISTA PREVIA DE IMAGEN ---
 document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('foto-archivo');
     
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// --- 2. SUBIR VELA ---
 async function subirVela() {
     const btn = document.querySelector('.btn-publish');
     const nombre = document.getElementById('nombre').value.trim();
@@ -45,19 +43,16 @@ async function subirVela() {
         const extension = fotoFile.name.split('.').pop();
         const nombreLimpio = `${Date.now()}_vela.${extension}`;
 
-        // Subir imagen al Storage
         const { data: uploadData, error: uploadError } = await _supabase.storage
             .from('imagens-velas')
             .upload(nombreLimpio, fotoFile);
 
         if (uploadError) throw new Error("Error subiendo imagen");
 
-        // Obtener URL Pública
         const { data: urlData } = _supabase.storage
             .from('imagens-velas')
             .getPublicUrl(nombreLimpio);
 
-        // Guardar en la Tabla productos
         const { error: dbError } = await _supabase
             .from('productos')
             .insert([{

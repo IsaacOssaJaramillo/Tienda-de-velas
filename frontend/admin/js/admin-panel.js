@@ -2,7 +2,7 @@ const supabaseUrl = 'https://irpgynjvxlsshaxgeuie.supabase.co';
 const supabaseKey = 'sb_publishable_LFzpTNq551UgF7Niftmoog_wWoC7iBS';
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-let todasLasVelas = []; // Guardamos aquí para el buscador
+let todasLasVelas = [];
 
 async function cargarInventario() {
     const { data, error } = await _supabase

@@ -1,13 +1,8 @@
 :root {
-    /* Nueva paleta imponente */
     --bg-dark: #050505;
-    /* Negro casi total */
     --card-bg: #121212;
-    /* Negro grisáceo para tarjetas */
     --primary-red: #e63946;
-    /* Rojo principal */
     --accent-red: #ff4d4d;
-    /* Rojo brillante para efectos */
     --text-main: #ffffff;
     --text-muted: #888888;
     --border-color: #222222;
@@ -27,14 +22,12 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar - Más agresiva y elegante */
 .sidebar {
     width: 260px;
     background: #000000;
     color: white;
     padding: 25px;
     border-right: 1px solid #1a0505;
-    /* Un toque de rojo oscuro en el borde */
 }
 
 .sidebar h2 {
@@ -64,7 +57,6 @@ body {
     border-left: 3px solid var(--primary-red);
 }
 
-/* Content Area */
 .content {
     flex: 1;
     padding: 40px;
@@ -94,7 +86,6 @@ body {
     box-shadow: 0 0 15px rgba(230, 57, 70, 0.2);
 }
 
-/* Tarjetas de Estadísticas */
 .stat-card {
     background: var(--card-bg);
     padding: 20px;
@@ -116,7 +107,6 @@ body {
     text-shadow: 0 0 10px rgba(230, 57, 70, 0.4);
 }
 
-/* Tabla Estilo Nocturno */
 .table-container {
     background: var(--card-bg);
     border-radius: 8px;
@@ -158,7 +148,6 @@ tr:hover td {
     border: 1px solid #333;
 }
 
-/* Botón de eliminar más "peligroso" */
 .btn-delete {
     background: transparent;
     color: var(--primary-red);
@@ -176,18 +165,15 @@ tr:hover td {
     box-shadow: 0 0 15px rgba(230, 57, 70, 0.5);
 }
 
-/* --- AJUSTES PARA PANTALLAS MEDIANAS (Tablets) --- */
 @media (max-width: 1024px) {
     .sidebar {
         width: 80px;
-        /* Reducimos el ancho */
         padding: 15px 5px;
     }
 
     .sidebar h2,
     .sidebar nav a span {
         display: none;
-        /* Escondemos el texto, dejamos solo iconos si tuvieras */
     }
 
     .sidebar nav a {
@@ -195,11 +181,9 @@ tr:hover td {
     }
 }
 
-/* --- AJUSTES PARA MÓVILES (Smartphones) --- */
 @media (max-width: 768px) {
     .dashboard {
         flex-direction: column;
-        /* Sidebar arriba, contenido abajo */
     }
 
     .sidebar {
@@ -220,7 +204,6 @@ tr:hover td {
         justify-content: center;
         gap: 10px;
         overflow-x: auto;
-        /* Permite deslizar el menú si hay muchos links */
     }
 
     .sidebar nav a {
@@ -235,25 +218,20 @@ tr:hover td {
 
     .header-tools {
         flex-direction: column;
-        /* Buscador arriba del botón */
         gap: 15px;
         align-items: stretch;
     }
 
     #buscador {
         width: 100%;
-        /* El buscador ocupa todo el ancho */
     }
 
-    /* TABLA RESPONSIVA */
     .table-container {
         overflow-x: auto;
-        /* Permite deslizar la tabla hacia los lados */
     }
 
     table {
         min-width: 600px;
-        /* Evita que las columnas se aplasten demasiado */
     }
 
     .stat-card span {
