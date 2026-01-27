@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Velas Artesanales</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        /* Estilos específicos para la tienda de clientes */
+        body {
+            background-color: #fefae0;
+            display: block;
+            padding: 20px;
+        }
+
+        .grid-velas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .precio {
+            color: #d4a373;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .btn-ws {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center; color: #d4a373; font-size: 2.5rem;">Nuestras Velas 🕯️</h1>
+
+    <div class="grid-velas" id="contenedor-velas">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // RECUERDA: Cambia esto por tus datos reales
+        const supabaseUrl = 'TU_URL_DE_SUPABASE';
+        const supabaseKey = 'TU_LLAVE_ANON_PUBLIC';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        const TELEFONO_DUENA = "573001234567"; // Reemplaza por el número real
+
+        async function cargarVelas() {
+            const { data: velas, error } = await _supabase
+                .from('productos')
+                .select('*');
+
+            if (error) {
+                console.error("Error cargando velas:", error);
+                return;
+            }
+
+            const contenedor = document.getElementById('contenedor-velas');
+            contenedor.innerHTML = ""; // Limpiar antes de cargar
+
+            velas.forEach(vela => {
+                // Mensaje automático para WhatsApp
+                const textoWS = encodeURIComponent(`Hola, me interesa comprar la vela: ${vela.nombre}`);
+                const linkWS = `https://wa.me/${TELEFONO_DUENA}?text=${textoWS}`;
+
+                contenedor.innerHTML += `
+                    <div class="card">
+                        <img src="${vela.imagen_url}" alt="${vela.nombre}">
+                        <h3>${vela.nombre}</h3>
+                        <p style="padding: 0 15px;">${vela.descripcion}</p>
+                        <p class="precio">$${vela.precio.toLocaleString()}</p>
+                        <a href="${linkWS}" target="_blank" class="btn-ws">
+                            Comprar por WhatsApp
+                        </a>
+                    </div>
+                `;
+            });
+        }
+        cargarVelas();
+    </script>
+</body>
+
+</html>
