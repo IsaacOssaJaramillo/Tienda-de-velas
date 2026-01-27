@@ -24,7 +24,6 @@ body {
     min-height: 100vh;
 }
 
-/* LADO ASIDE: VELA ANIMADA */
 .login-aside {
     flex: 1.2;
     background: linear-gradient(135deg, #000 0%, #1a0505 100%);
@@ -35,7 +34,6 @@ body {
     border-right: 1px solid #330000;
 }
 
-/* EFECTO VELA */
 .candle-container {
     position: relative;
     width: 60px;
@@ -75,7 +73,6 @@ body {
     }
 }
 
-/* LADO FORMULARIO */
 .login-section {
     flex: 1;
     display: flex;
@@ -102,7 +99,6 @@ body {
     font-size: 0.9rem;
 }
 
-/* INPUTS */
 .input-group {
     margin-bottom: 20px;
 }
@@ -131,7 +127,6 @@ input:focus {
     box-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
 }
 
-/* BOTÓN */
 #btnLogin {
     width: 100%;
     padding: 16px;
@@ -160,7 +155,6 @@ input:focus {
     font-size: 0.8rem;
 }
 
-/* RESPONSIVO */
 @media (max-width: 900px) {
     .login-aside {
         display: none;

@@ -1,110 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Velas Artesanales</title>
-    <link rel="stylesheet" href="admin-style.css">
-    <style>
-        /* Estilos específicos para la tienda de clientes */
-        body {
-            background-color: #fefae0;
-            display: block;
-            padding: 20px;
-        }
-
-        .grid-velas {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            padding-bottom: 20px;
-        }
-
-        .card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .precio {
-            color: #d4a373;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .btn-ws {
-            background-color: #25d366;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: bold;
-        }
-    </style>
+    <title>Velas Artesanales | Tienda</title>
+    <link rel="stylesheet" href="/frontend/styles.css">
 </head>
 
 <body>
-    <h1 style="text-align: center; color: #d4a373; font-size: 2.5rem;">Nuestras Velas 🕯️</h1>
+    <nav class="navbar">
+        <a href="/frontend/admin/html/loguin.html" class="logo">Yesay</a>
+        <div class="menu">
+            <a href="/frontend/cliente/html/productos.html">Productos</a>
+            <a href="/frontend/cliente/html/sobre-nosotros.html">Sobre Nosotros</a>
+            <a href="/frontend/cliente/html/cuidados.html">Cuidados</a>
+            <a href="/frontend/cliente/html/inspiracion.html">Inspiración</a>
+        </div>
+    </nav>
 
-    <div class="grid-velas" id="contenedor-velas">
-    </div>
+    <header style="text-align: center; padding: 100px 20px; background: url('https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=1600') center/cover; color: white;">
+        <h1 style="font-size: 3rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">Velas que Iluminan tu Alma</h1>
+        <p style="font-size: 1.2rem;">Hechas a mano con cera de soja natural</p>
+    </nav>
+
+    <section id="productos">
+        <h2 style="text-align: center; margin-top: 50px; color: var(--oro);">Nuestra Colección</h2>
+        <div class="grid-velas" id="contenedor-velas"></div>
+    </section>
+
+    <section id="nosotros" class="section-info">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos un taller artesanal dedicado a crear ambientes de paz. Cada vela es vertida a mano individualmente, utilizando fragancias premium y pabilos de algodón puro para asegurar una quemada limpia y duradera.</p>
+    </section>
+
+    <section id="cuidados" class="section-info" style="background: var(--crema);">
+        <h2>Cuidados de tu Vela</h2>
+        <div class="grid-features">
+            <div>
+                <h3>La primera vez</h3>
+                <p>Deja que la cera se derrita hasta los bordes para evitar "túneles".</p>
+            </div>
+            <div>
+                <h3>Corta el pabilo</h3>
+                <p>Mantén el pabilo a 5mm antes de cada encendido.</p>
+            </div>
+            <div>
+                <h3>Seguridad</h3>
+                <p>No la dejes encendida más de 4 horas seguidas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="inspiracion" class="section-info">
+        <h2>Inspiración</h2>
+        <p>Crea el momento perfecto: un baño tibio, tu música favorita y el aroma de nuestras velas. Transforma tu hogar en un santuario de relajación.</p>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        // RECUERDA: Cambia esto por tus datos reales
-        const supabaseUrl = 'TU_URL_DE_SUPABASE';
-        const supabaseKey = 'TU_LLAVE_ANON_PUBLIC';
-        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        const TELEFONO_DUENA = "573001234567"; // Reemplaza por el número real
-
-        async function cargarVelas() {
-            const { data: velas, error } = await _supabase
-                .from('productos')
-                .select('*');
-
-            if (error) {
-                console.error("Error cargando velas:", error);
-                return;
-            }
-
-            const contenedor = document.getElementById('contenedor-velas');
-            contenedor.innerHTML = ""; // Limpiar antes de cargar
-
-            velas.forEach(vela => {
-                // Mensaje automático para WhatsApp
-                const textoWS = encodeURIComponent(`Hola, me interesa comprar la vela: ${vela.nombre}`);
-                const linkWS = `https://wa.me/${TELEFONO_DUENA}?text=${textoWS}`;
-
-                contenedor.innerHTML += `
-                    <div class="card">
-                        <img src="${vela.imagen_url}" alt="${vela.nombre}">
-                        <h3>${vela.nombre}</h3>
-                        <p style="padding: 0 15px;">${vela.descripcion}</p>
-                        <p class="precio">$${vela.precio.toLocaleString()}</p>
-                        <a href="${linkWS}" target="_blank" class="btn-ws">
-                            Comprar por WhatsApp
-                        </a>
-                    </div>
-                `;
-            });
-        }
-        cargarVelas();
-    </script>
+    <script src="/frontend/cliente/js/producto.js"></script>
 </body>
-
 </html>
