@@ -8,7 +8,12 @@
     --border-color: #222;
 }
 
-/* Contenedor principal del contenido */
+body {
+    background-color: var(--bg-dark);
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
 .content {
     flex: 1;
     padding: 40px;
@@ -16,13 +21,37 @@
     min-height: 100vh;
 }
 
-/* Título de la sección */
+/* Header y Botón Volver */
+.header-tools {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn-back {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: fit-content;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    border-color: var(--primary-red);
+    color: var(--primary-red);
+}
+
 .header-tools h1 {
     color: var(--text-main);
     font-size: 1.8rem;
-    margin-bottom: 30px;
     border-left: 4px solid var(--primary-red);
     padding-left: 15px;
+    margin: 0;
 }
 
 /* Tarjeta del Formulario */
@@ -52,7 +81,7 @@
     margin-bottom: 30px;
 }
 
-/* Rejilla de inputs */
+/* Rejilla */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -63,7 +92,6 @@
     grid-column: span 2;
 }
 
-/* Estilo de los campos de texto */
 .input-group label {
     display: block;
     color: var(--text-main);
@@ -82,7 +110,7 @@
     border-radius: 6px;
     color: white;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .input-group input:focus, 
@@ -93,18 +121,17 @@
     background: #111;
 }
 
-/* Botón de subir archivo personalizado */
+/* Input de Imagen */
 .custom-file-upload {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 30px;
-    border: 2px dashed #333;
+    border: 2px dashed var(--border-color);
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s;
     background: #0d0d0d;
+    transition: 0.3s;
 }
 
 .custom-file-upload:hover {
@@ -116,12 +143,16 @@
     display: none;
 }
 
-.upload-text {
-    color: var(--text-muted);
-    font-size: 0.9rem;
+#img-preview-upload {
+    width: 150px;
+    height: 150px;
+    margin-top: 15px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid var(--primary-red);
 }
 
-/* Botón de Publicar */
+/* Botón Publicar */
 .btn-publish {
     grid-column: span 2;
     padding: 16px;
@@ -133,9 +164,7 @@
     font-size: 1rem;
     text-transform: uppercase;
     cursor: pointer;
-    letter-spacing: 1px;
     transition: 0.3s;
-    margin-top: 10px;
 }
 
 .btn-publish:hover {
@@ -146,31 +175,16 @@
 
 .btn-publish:disabled {
     background: #444;
-    cursor: not-allowed;
-    transform: none;
+    cursor: wait;
 }
 
-/* Animaciones */
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- RESPONSIVO PARA MÓVILES --- */
 @media (max-width: 768px) {
-    .content {
-        padding: 20px;
-    }
-    
-    .form-grid {
-        grid-template-columns: 1fr; /* Una sola columna en móvil */
-    }
-    
-    .full-width {
-        grid-column: span 1;
-    }
-
-    .form-container {
-        padding: 25px;
-    }
+    .form-grid { grid-template-columns: 1fr; }
+    .full-width { grid-column: span 1; }
+    .content { padding: 20px; }
 }
