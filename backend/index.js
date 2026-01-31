@@ -10,16 +10,12 @@ app.use(cors());
 // Conexión a Supabase
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
-// --- RUTAS PARA POSTMAN ---
-
-// 1. Obtener todas las velas (Público)
 app.get('/velas', async (req, res) => {
     const { data, error } = await supabase.from('productos').select('*');
     if (error) return res.status(400).json(error);
     res.json(data);
 });
 
-// 2. Crear una vela nueva (Esto lo usará el Admin)
 app.post('/velas', async (req, res) => {
     const { nombre, descripcion, precio, imagen_url, stock } = req.body;
     const { data, error } = await supabase
@@ -28,6 +24,29 @@ app.post('/velas', async (req, res) => {
     
     if (error) return res.status(400).json(error);
     res.status(201).json({ mensaje: "Vela creada con éxito", data });
+});
+
+app.put('/velas/:id', async (req, res) => {
+    const { id } = req.params;
+    const updates = req.body;
+    const { data, error } = await supabase
+        .from('productos')
+        .update(updates)
+        .eq('id', id);
+
+    if (error) return res.status(400).json(error);
+    res.json({ mensaje: "Vela actualizada", data });
+});
+
+app.delete('/velas/:id', async (req, res) => {
+    const { id } = req.params;
+    const { error } = await supabase
+        .from('productos')
+        .delete()
+        .eq('id', id);
+
+    if (error) return res.status(400).json(error);
+    res.json({ mensaje: "Vela eliminada correctamente" });
 });
 
 const PORT = process.env.PORT || 3000;
